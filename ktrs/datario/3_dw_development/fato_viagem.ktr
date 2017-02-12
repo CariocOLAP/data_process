@@ -103,11 +103,13 @@
   <hop> <from>Obtendo dados da tabela Viagens</from><to>Classificando faixas de velocidade</to><enabled>Y</enabled> </hop>
   <hop> <from>Classificando faixas de velocidade</from><to>Obtendo valor do campo id_linha</to><enabled>Y</enabled> </hop>
   <hop> <from>Obtendo valor do campo id_linha</from><to>Obtendo valor do campo id_carro</to><enabled>Y</enabled> </hop>
-  <hop> <from>Obtendo valor do campo id_carro</from><to>Obtendo valor do campo id_data</to><enabled>Y</enabled> </hop>
   <hop> <from>Obtendo valor do campo id_data</from><to>Obtendo valor do campo id_turno</to><enabled>Y</enabled> </hop>
   <hop> <from>Obtendo valor do campo id_turno</from><to>Obtendo valor do campo id_velocidade</to><enabled>Y</enabled> </hop>
   <hop> <from>Obtendo valor do campo id_velocidade</from><to>Removendo campos desnecess&#xe1;rios</to><enabled>Y</enabled> </hop>
   <hop> <from>Removendo campos desnecess&#xe1;rios</from><to>Armazenando informa&#xe7;&#xf5;es na tabela fato_viagem</to><enabled>Y</enabled> </hop>
+  <hop> <from>Criando Tabela</from><to>Obtendo dados da tabela Viagens</to><enabled>Y</enabled> </hop>
+  <hop> <from>Obtendo valor do campo id_carro</from><to>Formata Data</to><enabled>Y</enabled> </hop>
+  <hop> <from>Formata Data</from><to>Obtendo valor do campo id_data</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Armazenando informa&#xe7;&#xf5;es na tabela fato_viagem</name>
@@ -124,7 +126,7 @@
     <schema>dw</schema>
     <table>fato_viagem</table>
     <commit>1000</commit>
-    <truncate>Y</truncate>
+    <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
     <specify_fields>Y</specify_fields>
@@ -201,7 +203,7 @@
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>288</xloc>
+      <xloc>370</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
       </GUI>
@@ -227,7 +229,7 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>96</xloc>
+      <xloc>180</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
       </GUI>
@@ -269,7 +271,7 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>688</xloc>
+      <xloc>740</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
       </GUI>
@@ -311,7 +313,7 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>928</xloc>
+      <xloc>1030</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
       </GUI>
@@ -353,7 +355,7 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>480</xloc>
+      <xloc>550</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
       </GUI>
@@ -482,6 +484,73 @@
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1632</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Criando Tabela</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>PF - localhost</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>DROP TABLE IF EXISTS dw.fato_viagem&#x3b;&#xa;CREATE TABLE IF NOT EXISTS dw.fato_viagem&#xa;&#x28;&#xa;  id_viagem BIGINT&#xa;, id_linha DOUBLE PRECISION&#xa;, id_carro BIGINT&#xa;, id_data DOUBLE PRECISION&#xa;, id_turno BIGINT&#xa;, id_faixa_velocidade BIGINT&#xa;&#x29;&#xa;&#x3b;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>40</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Formata Data</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>        <select_unspecified>N</select_unspecified>
+      <meta>        <name>dia_viagem</name>
+        <rename>dia_viagem</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>yyyy-MM-dd</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>880</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
       </GUI>

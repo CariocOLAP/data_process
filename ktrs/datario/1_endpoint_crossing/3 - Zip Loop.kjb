@@ -178,7 +178,7 @@
       <name>SQL - Criar tabela tempor&#xe1;ria</name>
       <description/>
       <type>SQL</type>
-      <sql>DROP TABLE IF EXISTS &#x22;&#x24;&#x7b;short_filename&#x7d;&#x22;&#x3b;&#xa;CREATE TABLE &#x22;&#x24;&#x7b;short_filename&#x7d;&#x22; &#x28;&#xa;datahora timestamp without time zone,&#xa;ordem text,&#xa;linha text,&#xa;latitude double precision,&#xa;longitude double precision,&#xa;velocidade double precision&#xa;&#x29;&#x3b;</sql>
+      <sql>DROP TABLE IF EXISTS stage.&#x22;&#x24;&#x7b;short_filename&#x7d;&#x22;&#x3b;&#xa;CREATE TABLE stage.&#x22;&#x24;&#x7b;short_filename&#x7d;&#x22; &#x28;&#xa;datahora timestamp without time zone,&#xa;ordem text,&#xa;linha text,&#xa;latitude double precision,&#xa;longitude double precision,&#xa;velocidade double precision&#xa;&#x29;&#x3b;</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>

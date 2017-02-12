@@ -182,7 +182,7 @@
       <name>SQL - Insere Dados em Pontos Finais Efetivos</name>
       <description/>
       <type>SQL</type>
-      <sql>INSERT INTO temp.pontos_finais_efetivos &#x28;&#xa;linha,  nome_linha,  sentido,  direcao,  ordem,  datahora,  ponto_partida,&#xa;  distancia,  latitude,  longitude,  velocidade&#x29;&#x28; &#xa;SELECT  &#xa;efetivo.linha, &#xa;pf.nome_linha, &#xa;pf.sentido, &#xa;pf.direcao, &#xa;efetivo.ordem,&#xa;efetivo.datahora,&#xa;pf.id ponto_partida,&#xa;pf.distancia,&#xa;efetivo.latitude,&#xa;efetivo.longitude, &#xa;efetivo.velocidade&#xa;FROM temp.lista_pontos_finais_2 pf&#xa;JOIN &#x22;&#x24;&#x7b;short_filename&#x7d;&#x22; efetivo ON &#xa;&#x28;round&#x28;&#x28;point&#x28;efetivo.longitude&#x3a;&#x3a;float, efetivo.latitude&#x3a;&#x3a;float&#x29; &#x3c;&#x40;&#x3e; point&#x28;pf.longitude&#x3a;&#x3a;float, pf.latitude&#x3a;&#x3a;float&#x29;&#x29;&#x3a;&#x3a;numeric, 5&#x29;&#x2a;1.60934 &#x3c; 0.4&#x29; AND&#xa;pf.linha &#x3d; efetivo.linha AND distancia &#x3e; 2&#xa;ORDER BY linha, ordem, datahora ASC&#x29;&#x3b;</sql>
+      <sql>INSERT INTO stage.pontos_finais_efetivos &#x28;&#xa;linha,  nome_linha,  sentido,  direcao,  ordem,  datahora,  ponto_partida,&#xa;  distancia,  latitude,  longitude,  velocidade&#x29;&#x28; &#xa;SELECT  &#xa;efetivo.linha, &#xa;pf.itinerario as nome_linha, &#xa;pf.sentido, &#xa;pf.direcao, &#xa;efetivo.ordem,&#xa;efetivo.datahora,&#xa;pf.id as ponto_partida,&#xa;pf.distancia,&#xa;efetivo.latitude,&#xa;efetivo.longitude, &#xa;efetivo.velocidade&#xa;FROM stage.routeswithdistance pf&#xa;JOIN stage.&#x22;&#x24;&#x7b;short_filename&#x7d;&#x22; efetivo ON &#xa;&#x28;round&#x28;&#x28;point&#x28;efetivo.longitude&#x3a;&#x3a;float, efetivo.latitude&#x3a;&#x3a;float&#x29; &#x3c;&#x40;&#x3e; point&#x28;pf.longitude&#x3a;&#x3a;float, pf.latitude&#x3a;&#x3a;float&#x29;&#x29;&#x3a;&#x3a;numeric, 5&#x29;&#x2a;1.60934 &#x3c; 0.4&#x29; AND&#xa;pf.numero &#x3d; efetivo.linha AND distancia &#x3e; 2&#xa;ORDER BY linha, ordem, datahora ASC&#x29;&#x3b;</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -210,7 +210,7 @@
       <name>SQL - Criar Tabela Pontos Finais Efetivos</name>
       <description/>
       <type>SQL</type>
-      <sql>CREATE TABLE IF NOT EXISTS temp.pontos_finais_efetivos&#xa;&#x28;&#xa;  id integer NOT NULL DEFAULT nextval&#x28;&#x27;temp.sq_pf_efetivos&#x27;&#x3a;&#x3a;regclass&#x29;,&#xa;  linha text,&#xa;  nome_linha text,&#xa;  sentido text,&#xa;  direcao double precision,&#xa;  ordem text,&#xa;  datahora timestamp without time zone,&#xa;  ponto_partida integer,&#xa;  distancia numeric,&#xa;  latitude double precision,&#xa;  longitude double precision,&#xa;  velocidade double precision,&#xa;  CONSTRAINT pontos_finais3_pkey PRIMARY KEY &#x28;id&#x29;&#xa;&#x29;&#x3b;</sql>
+      <sql>CREATE SEQUENCE IF NOT EXISTS stage.sq_pf_efetivos&#x3b;&#xa;CREATE TABLE IF NOT EXISTS stage.pontos_finais_efetivos&#xa;&#x28;&#xa;  id integer NOT NULL DEFAULT nextval&#x28;&#x27;stage.sq_pf_efetivos&#x27;&#x3a;&#x3a;regclass&#x29;,&#xa;  linha text,&#xa;  nome_linha text,&#xa;  sentido text,&#xa;  direcao double precision,&#xa;  ordem text,&#xa;  datahora timestamp without time zone,&#xa;  ponto_partida integer,&#xa;  distancia numeric,&#xa;  latitude double precision,&#xa;  longitude double precision,&#xa;  velocidade double precision,&#xa;  CONSTRAINT pontos_finais3_pkey PRIMARY KEY &#x28;id&#x29;&#xa;&#x29;&#x3b;</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -226,7 +226,7 @@
       <name>SQL - Remover Tabela Temporaria</name>
       <description/>
       <type>SQL</type>
-      <sql>DROP TABLE IF EXISTS &#x22;&#x24;&#x7b;short_filename&#x7d;&#x22;&#x3b;</sql>
+      <sql>DROP TABLE IF EXISTS stage.&#x22;&#x24;&#x7b;short_filename&#x7d;&#x22;&#x3b;</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>dm_carro</name>
+    <name>2_calculate_distance</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -9,6 +9,31 @@
     <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
+        <parameter>
+            <name>DATABASE_NAME</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>HOSTNAME</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>PASSWORD</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>PORT_NUMBER</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>USERNAME</name>
+            <default_value/>
+            <description/>
+        </parameter>
     </parameters>
     <log>
 <trans-log-table><connection/>
@@ -67,9 +92,9 @@
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2016&#x2f;05&#x2f;28 21&#x3a;02&#x3a;53.665</created_date>
+  <created_date>2017&#x2f;02&#x2f;12 03&#x3a;33&#x3a;12.898</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;05&#x2f;28 21&#x3a;02&#x3a;53.665</modified_date>
+  <modified_date>2017&#x2f;02&#x2f;12 03&#x3a;33&#x3a;12.898</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -100,14 +125,12 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Mapeia Consorcio</from><to>Adiciona sequ&#xea;ncia</to><enabled>Y</enabled> </hop>
-  <hop> <from>Pegar Ordem por Viagens</from><to>Mapeia Consorcio</to><enabled>Y</enabled> </hop>
-  <hop> <from>Adiciona sequ&#xea;ncia</from><to>Salvar tabela - DM_Carro</to><enabled>Y</enabled> </hop>
-  <hop> <from>Cria tabela DM_Carro</from><to>Pegar Ordem por Viagens</to><enabled>Y</enabled> </hop>
+  <hop> <from>Carrega Tabela Trajetos com Geo Info</from><to>Block this step until steps finish</to><enabled>Y</enabled> </hop>
+  <hop> <from>Block this step until steps finish</from><to>Salva Trajetos com Distancia</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Adiciona sequ&#xea;ncia</name>
-    <type>Sequence</type>
+    <name>Block this step until steps finish</name>
+    <type>BlockUntilStepsFinish</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -116,26 +139,48 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-      <valuename>valuename</valuename>
-      <use_database>N</use_database>
-      <connection>PF - localhost</connection>
-      <schema/>
-      <seqname>SEQ_</seqname>
-      <use_counter>Y</use_counter>
-      <counter_name/>
-      <start_at>1</start_at>
-      <increment_by>1</increment_by>
-      <max_value>999999999</max_value>
+    <steps>
+      <step>
+        <name>Criando tabela</name>
+        <CopyNr>0</CopyNr>
+        </step>
+      </steps>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>544</xloc>
-      <yloc>48</yloc>
+      <xloc>360</xloc>
+      <yloc>200</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Cria tabela DM_Carro</name>
+    <name>Carrega Tabela Trajetos com Geo Info</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>PF - localhost</connection>
+    <sql>SELECT ida.&#x2a;,&#xa;round&#x28;&#x28;point&#x28;ida.longitude&#x3a;&#x3a;float, ida.latitude&#x3a;&#x3a;float&#x29; &#x3c;&#x40;&#x3e; point&#x28;volta.longitude&#x3a;&#x3a;float, volta.latitude&#x3a;&#x3a;float&#x29;&#x29;&#x3a;&#x3a;numeric, 5&#x29;&#x2a;1.60934 distancia&#xa;FROM stage.trajetoswithgeoinfo ida &#xa;INNER JOIN stage.trajetoswithgeoinfo volta ON ida.numero &#x3d; volta.numero AND ida.id &#x3c;&#x3e; volta.id</sql>
+    <limit/>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>160</xloc>
+      <yloc>200</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Criando tabela</name>
     <type>ExecSQL</type>
     <description/>
     <distribute>Y</distribute>
@@ -150,7 +195,7 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>DROP TABLE IF EXISTS dw.dm_carro&#x3b;&#xd;&#xa;&#xd;&#xa;CREATE TABLE dw.dm_carro &#x28;&#xd;&#xa;id_carro	BIGINT,&#xd;&#xa;ordem	VARCHAR&#x28;512&#x29;,&#xd;&#xa;consorcio	VARCHAR&#x28;255&#x29;&#xd;&#xa;&#x29;&#x3b;&#xd;&#xa;</sql>
+    <sql>DROP TABLE IF EXISTS stage.routeswithdistance&#x3b;&#xd;&#xa;&#xd;&#xa;CREATE TABLE stage.routeswithdistance&#xa;&#x28;&#xa;  id DOUBLE PRECISION&#xa;, latitude TEXT&#xa;, longitude TEXT&#xa;, sequencia DOUBLE PRECISION&#xa;, sentido VARCHAR&#x28;255&#x29;&#xa;, direcao BIGINT&#xa;, numero TEXT&#xa;, itinerario TEXT&#xa;, itinerario_desc TEXT&#xa;, ponto_final BOOLEAN&#xa;, cidade TEXT&#xa;, bairro TEXT&#xa;, rua TEXT&#xa;, cep TEXT&#xa;, distancia DOUBLE PRECISION&#xa;&#x29;&#xa;&#x3b;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -160,80 +205,14 @@
     </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>80</xloc>
-      <yloc>48</yloc>
+      <xloc>130</xloc>
+      <yloc>40</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Mapeia Consorcio</name>
-    <type>ValueMapper</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <field_to_use>first_letter</field_to_use>
-    <target_field>consorcio</target_field>
-    <non_match_default>N&#xc3;O IDENTIFICADO</non_match_default>
-    <fields>
-      <field>
-        <source_value>A</source_value>
-        <target_value>Intersul</target_value>
-      </field>
-      <field>
-        <source_value>B</source_value>
-        <target_value>Internorte</target_value>
-      </field>
-      <field>
-        <source_value>C</source_value>
-        <target_value>Transcarioca</target_value>
-      </field>
-      <field>
-        <source_value>D</source_value>
-        <target_value>Santa Cruz</target_value>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>416</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Pegar Ordem por Viagens</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>PF - localhost</connection>
-    <sql>SELECT DISTINCT ORDEM, substring&#x28;ORDEM from 1 for 1&#x29; first_letter &#xa;FROM stage.pontos_finais_efetivos &#xa;ORDER BY ORDEM ASC</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>256</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Salvar tabela - DM_Carro</name>
+    <name>Salva Trajetos com Distancia</name>
     <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -244,10 +223,10 @@
            <schema_name/>
            </partitioning>
     <connection>PF - localhost</connection>
-    <schema>dw</schema>
-    <table>dm_carro</table>
-    <commit>1000</commit>
-    <truncate>Y</truncate>
+    <schema>stage</schema>
+    <table>routeswithdistance</table>
+    <commit>10000</commit>
+    <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
     <specify_fields>Y</specify_fields>
@@ -262,22 +241,70 @@
     <return_field/>
     <fields>
         <field>
-          <column_name>id_carro</column_name>
-          <stream_name>valuename</stream_name>
+          <column_name>id</column_name>
+          <stream_name>id</stream_name>
         </field>
         <field>
-          <column_name>ordem</column_name>
-          <stream_name>ordem</stream_name>
+          <column_name>latitude</column_name>
+          <stream_name>latitude</stream_name>
         </field>
         <field>
-          <column_name>consorcio</column_name>
-          <stream_name>consorcio</stream_name>
+          <column_name>longitude</column_name>
+          <stream_name>longitude</stream_name>
+        </field>
+        <field>
+          <column_name>sequencia</column_name>
+          <stream_name>sequencia</stream_name>
+        </field>
+        <field>
+          <column_name>sentido</column_name>
+          <stream_name>sentido</stream_name>
+        </field>
+        <field>
+          <column_name>direcao</column_name>
+          <stream_name>direcao</stream_name>
+        </field>
+        <field>
+          <column_name>numero</column_name>
+          <stream_name>numero</stream_name>
+        </field>
+        <field>
+          <column_name>itinerario</column_name>
+          <stream_name>itinerario</stream_name>
+        </field>
+        <field>
+          <column_name>itinerario_desc</column_name>
+          <stream_name>itinerario_desc</stream_name>
+        </field>
+        <field>
+          <column_name>ponto_final</column_name>
+          <stream_name>ponto_final</stream_name>
+        </field>
+        <field>
+          <column_name>cidade</column_name>
+          <stream_name>cidade</stream_name>
+        </field>
+        <field>
+          <column_name>bairro</column_name>
+          <stream_name>bairro</stream_name>
+        </field>
+        <field>
+          <column_name>rua</column_name>
+          <stream_name>rua</stream_name>
+        </field>
+        <field>
+          <column_name>cep</column_name>
+          <stream_name>cep</stream_name>
+        </field>
+        <field>
+          <column_name>distancia</column_name>
+          <stream_name>distancia</stream_name>
         </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>704</xloc>
-      <yloc>48</yloc>
+      <xloc>560</xloc>
+      <yloc>200</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

@@ -488,11 +488,11 @@
   <order>
     <hop>
       <from>Planilha de empresas e linhas</from>
-      <to>Replace in string</to>
+      <to>Convertendo Float para Integer</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Replace in string</from>
+      <from>Convertendo Float para Integer</from>
       <to>Inser&#xe7;&#xe3;o na tabela tempor&#xe1;ria no Banco de Dados</to>
       <enabled>Y</enabled>
     </hop>
@@ -534,8 +534,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>130</xloc>
-      <yloc>100</yloc>
+      <xloc>128</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -590,8 +590,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>700</xloc>
-      <yloc>100</yloc>
+      <xloc>720</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -700,14 +700,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>270</xloc>
-      <yloc>100</yloc>
+      <xloc>304</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
 
   <step>
-    <name>Replace in string</name>
+    <name>Convertendo Float para Integer</name>
     <type>ReplaceString</type>
     <description/>
     <distribute>Y</distribute>
@@ -749,8 +749,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>460</xloc>
-      <yloc>100</yloc>
+      <xloc>480</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
     </step>

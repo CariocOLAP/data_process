@@ -9,31 +9,6 @@
     <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
-        <parameter>
-            <name>DATABASE_NAME</name>
-            <default_value/>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>HOSTNAME</name>
-            <default_value/>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>PASSWORD</name>
-            <default_value/>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>PORT_NUMBER</name>
-            <default_value/>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>USERNAME</name>
-            <default_value/>
-            <description/>
-        </parameter>
     </parameters>
     <log>
 <trans-log-table><connection/>
@@ -125,9 +100,34 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Planilha IBGE 3.6.3 - Emprego Atividade Principal</from><to>Guardando em tabela tempor&#xe1;ria</to><enabled>Y</enabled> </hop>
-  <hop> <from>Criando tabela tempor&#xe1;ria</from><to>Planilha IBGE 3.6.3 - Emprego Atividade Principal</to><enabled>Y</enabled> </hop>
+  <hop> <from>Planilha IBGE 3.6.3 - Emprego Atividade Principal</from><to>Aguarda Criar Tabela</to><enabled>Y</enabled> </hop>
+  <hop> <from>Aguarda Criar Tabela</from><to>Guardando em tabela tempor&#xe1;ria</to><enabled>Y</enabled> </hop>
   </order>
+  <step>
+    <name>Aguarda Criar Tabela</name>
+    <type>BlockUntilStepsFinish</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <steps>
+      <step>
+        <name>Criando tabela tempor&#xe1;ria</name>
+        <CopyNr>0</CopyNr>
+        </step>
+      </steps>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>620</xloc>
+      <yloc>150</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
   <step>
     <name>Criando tabela tempor&#xe1;ria</name>
     <type>ExecSQL</type>
@@ -144,7 +144,7 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>CREATE SCHEMA IF NOT EXISTS stage&#x3b;&#xd;&#xa;&#xd;&#xa;DROP TABLE IF EXISTS stage.atividade_principal&#x3b;&#xd;&#xa;&#xd;&#xa;CREATE TABLE stage.atividade_principal&#xd;&#xa;&#x28;&#xd;&#xa;  agricultura TEXT&#xd;&#xa;, extrativista TEXT&#xd;&#xa;, transformacao TEXT&#xd;&#xa;, eletricidade TEXT&#xd;&#xa;, esgoto TEXT&#xd;&#xa;, contrucao TEXT&#xd;&#xa;, oficina TEXT&#xd;&#xa;, transporte TEXT&#xd;&#xa;, alimentacao TEXT&#xd;&#xa;, comunicacao TEXT&#xd;&#xa;, financeiro TEXT&#xd;&#xa;, imobiliario TEXT&#xd;&#xa;, cientifico TEXT&#xd;&#xa;, administrativo TEXT&#xd;&#xa;, publico TEXT&#xd;&#xa;, educacao TEXT&#xd;&#xa;, saude TEXT&#xd;&#xa;, artes TEXT&#xd;&#xa;, outros TEXT&#xd;&#xa;, domesticos TEXT&#xd;&#xa;, internacional TEXT&#xd;&#xa;, sem_classificacao TEXT&#xd;&#xa;, bairro_1 TEXT&#xd;&#xa;, bairro_2 TEXT&#xd;&#xa;, bairro_3 TEXT&#xd;&#xa;, bairro_4 TEXT&#xd;&#xa;, bairro_5 TEXT&#xd;&#xa;, bairro_6 TEXT&#xd;&#xa;&#x29;&#x3b;</sql>
+    <sql>DROP TABLE IF EXISTS stage.atividade_principal&#x3b;&#xd;&#xa;&#xd;&#xa;CREATE TABLE stage.atividade_principal&#xd;&#xa;&#x28;&#xd;&#xa;  agricultura TEXT&#xd;&#xa;, extrativista TEXT&#xd;&#xa;, transformacao TEXT&#xd;&#xa;, eletricidade TEXT&#xd;&#xa;, esgoto TEXT&#xd;&#xa;, contrucao TEXT&#xd;&#xa;, oficina TEXT&#xd;&#xa;, transporte TEXT&#xd;&#xa;, alimentacao TEXT&#xd;&#xa;, comunicacao TEXT&#xd;&#xa;, financeiro TEXT&#xd;&#xa;, imobiliario TEXT&#xd;&#xa;, cientifico TEXT&#xd;&#xa;, administrativo TEXT&#xd;&#xa;, publico TEXT&#xd;&#xa;, educacao TEXT&#xd;&#xa;, saude TEXT&#xd;&#xa;, artes TEXT&#xd;&#xa;, outros TEXT&#xd;&#xa;, domesticos TEXT&#xd;&#xa;, internacional TEXT&#xd;&#xa;, sem_classificacao TEXT&#xd;&#xa;, bairro_1 TEXT&#xd;&#xa;, bairro_2 TEXT&#xd;&#xa;, bairro_3 TEXT&#xd;&#xa;, bairro_4 TEXT&#xd;&#xa;, bairro_5 TEXT&#xd;&#xa;, bairro_6 TEXT&#xd;&#xa;&#x29;&#x3b;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -154,8 +154,8 @@
     </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>270</xloc>
-      <yloc>170</yloc>
+      <xloc>170</xloc>
+      <yloc>150</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -304,8 +304,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>530</xloc>
-      <yloc>270</yloc>
+      <xloc>800</xloc>
+      <yloc>150</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -744,8 +744,8 @@
     <spreadsheet_type>JXL</spreadsheet_type>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>270</xloc>
-      <yloc>270</yloc>
+      <xloc>390</xloc>
+      <yloc>150</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

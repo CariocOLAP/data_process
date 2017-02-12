@@ -9,6 +9,31 @@
     <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
+        <parameter>
+            <name>DATABASE_NAME</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>HOSTNAME</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>PASSWORD</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>PORT_NUMBER</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>USERNAME</name>
+            <default_value/>
+            <description/>
+        </parameter>
     </parameters>
     <log>
 <trans-log-table><connection/>

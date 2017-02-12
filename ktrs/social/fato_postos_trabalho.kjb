@@ -11,6 +11,31 @@
   <modified_user>-</modified_user>
   <modified_date>2017&#x2f;02&#x2f;02 23&#x3a;29&#x3a;36.512</modified_date>
     <parameters>
+        <parameter>
+            <name>DATABASE_NAME</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>HOSTNAME</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>PASSWORD</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>PORT_NUMBER</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>USERNAME</name>
+            <default_value/>
+            <description/>
+        </parameter>
     </parameters>
     <slaveservers>
     </slaveservers>

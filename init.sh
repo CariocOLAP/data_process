@@ -10,7 +10,9 @@ PORT_NUMBER=$2
 USERNAME=$4
 
 echo "#################################Creating tables#################################"
-sudo -u $USERNAME psql < ./scripts/init_db.sql
+sudo -u postgres psql < ./scripts/drop_database.sql
+sudo -u postgres psql < ./scripts/create_database.sql
+sudo -u postgres psql < ./scripts/init_db.sql
 
 echo "#################################Loading Extra Data Into DW#################################"
 sh kettle/pan.sh -file="../ktrs/extra/load_extra_data.ktr" -param:DATABASE_NAME=$DATABASE_NAME -param:PASSWORD=$PASSWORD -param:PORT_NUMBER=$PORT_NUMBER -param:USERNAME=$USERNAME -param:HOSTNAME=$HOSTNAME
@@ -46,4 +48,4 @@ sh kettle/kitchen.sh -file="../ktrs/social/fato_trabalho_deslocamento.kjb" -para
 
 echo "#################################Done#################################"
 
-#Getting planned trips data
+echo "Getting planned trips data"

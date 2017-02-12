@@ -1,0 +1,5 @@
+id;turno;intervalo_turno_horas
+5;Noite;18h até 24h
+6;Madrugada;24h até 5h
+3;Manhã;5h até 12h
+4;Tarde;12h até 18h

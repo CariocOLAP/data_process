@@ -1,0 +1,15 @@
+GPS Collector 1.0
+
+Authors:
+-André Reis de Brito
+-Gabriel de Sá Rodrigues
+-Gian Pereira Paixão
+
+Requirements:
+
+-PostgreSQL 9.5 with earth and cube extensions
+-Linux for shell scripts running
+
+Tutorial for Installing needed software:
+
+

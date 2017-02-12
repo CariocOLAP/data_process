@@ -1,0 +1,6 @@
+id_faixa_velocidade;classificacao;faixa_kmh
+1;Muito Demorado;< 10
+2;Demorado;10 a 12
+3;Esperado;13 a 17
+4;Rápido;18 a 24
+5;Muito Rápido;> 25

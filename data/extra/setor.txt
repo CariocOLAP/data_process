@@ -1,0 +1,23 @@
+setor;id_atividade
+Primario;1
+Primário;2
+Secundário;3
+Secundário;4
+Secundário;5
+Secundário;6
+Terciário;7
+Terciário;8
+Terciário;9
+Terciário;10
+Terciário;11
+Terciário;12
+Terciário;13
+Terciário;14
+Terciário;15
+Terciário;16
+Terciário;17
+Terciário;18
+Terciário;19
+Terciário;20
+Sem classificação;21
+Sem classificação;22

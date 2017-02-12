@@ -1,6 +1,4 @@
 sudo apt install postgresql-9.5
 sudo apt install postgresql-9.5-postgis-scripts
 
-#in postgres, install extensions
-#create extension cube;
-#create extension earthdistance;
+sudo -u postgres psql < ./scripts/install_pg_extensions.sql

@@ -575,7 +575,7 @@
       <schema_name/>
     </partitioning>
     <connection>PF - localhost</connection>
-    <sql>SELECT DISTINCT ORDEM, substring&#x28;ORDEM from 1 for 1&#x29; first_letter &#xa;FROM temp.pontos_finais_efetivos &#xa;ORDER BY ORDEM ASC</sql>
+    <sql>SELECT DISTINCT ORDEM, substring&#x28;ORDEM from 1 for 1&#x29; first_letter &#xa;FROM stage.pontos_finais_efetivos &#xa;ORDER BY ORDEM ASC</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

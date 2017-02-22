@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>export_to_dw</name>
+  <name>run_social_data</name>
     <description/>
     <extended_description/>
     <job_version/>
     <job_status>0</job_status>
   <directory>&#x2f;</directory>
   <created_user>-</created_user>
-  <created_date>2017&#x2f;01&#x2f;23 18&#x3a;28&#x3a;45.844</created_date>
+  <created_date>2017&#x2f;02&#x2f;18 13&#x3a;14&#x3a;09.761</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2017&#x2f;01&#x2f;23 18&#x3a;28&#x3a;45.844</modified_date>
+  <modified_date>2017&#x2f;02&#x2f;18 13&#x3a;14&#x3a;09.761</modified_date>
     <parameters>
         <parameter>
             <name>DATABASE_NAME</name>
@@ -61,7 +61,7 @@
   <entries>
     <entry>
       <name>START</name>
-      <description>Special entries</description>
+      <description/>
       <type>SPECIAL</type>
       <start>Y</start>
       <dummy>N</dummy>
@@ -76,16 +76,16 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>80</xloc>
-      <yloc>90</yloc>
+      <xloc>50</xloc>
+      <yloc>140</yloc>
       </entry>
     <entry>
-      <name>Criando Dimens&#xe3;o Carro</name>
+      <name>DM_Atividade_MTE</name>
       <description/>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;dm_carro.ktr</filename>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;dm_atividade_mte.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -109,16 +109,26 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>210</xloc>
-      <yloc>90</yloc>
+      <xloc>130</xloc>
+      <yloc>140</yloc>
       </entry>
     <entry>
-      <name>Criando Dimens&#xe3;o Data</name>
+      <name>Sucesso</name>
+      <description/>
+      <type>SUCCESS</type>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>850</xloc>
+      <yloc>310</yloc>
+      </entry>
+    <entry>
+      <name>DM_ATIVIDADE_PRINCIPAL</name>
       <description/>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;dm_data.ktr</filename>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;dm_atividade_principal.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -142,16 +152,16 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>370</xloc>
-      <yloc>90</yloc>
+      <xloc>270</xloc>
+      <yloc>140</yloc>
       </entry>
     <entry>
-      <name>Criando Dimens&#xe3;o Linhas</name>
+      <name>DM_FAIXA_SALARIAL</name>
       <description/>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;dm_linhas.ktr</filename>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;dm_faixa_salarial.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -175,16 +185,16 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>540</xloc>
-      <yloc>90</yloc>
+      <xloc>410</xloc>
+      <yloc>140</yloc>
       </entry>
     <entry>
-      <name>Criando Fato Viagem</name>
+      <name>DM_LOCAL</name>
       <description/>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;fato_viagem.ktr</filename>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;dm_local.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -208,80 +218,138 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>690</xloc>
-      <yloc>90</yloc>
+      <xloc>510</xloc>
+      <yloc>140</yloc>
       </entry>
     <entry>
-      <name>Criando Rota</name>
+      <name>FATO_OCUPACAO</name>
       <description/>
-      <type>TRANS</type>
+      <type>JOB</type>
       <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;rota.ktr</filename>
-      <transname/>
+      <job_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;fato_ocupacao.kjb</filename>
+      <jobname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
       <set_logfile>N</set_logfile>
       <logfile/>
       <logext/>
       <add_date>N</add_date>
       <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
+      <loglevel>Nothing</loglevel>
       <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
       <wait_until_finished>Y</wait_until_finished>
       <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
       <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
+      <pass_export>N</pass_export>
       <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
+      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>820</xloc>
-      <yloc>90</yloc>
+      <xloc>600</xloc>
+      <yloc>140</yloc>
       </entry>
     <entry>
-      <name>Criando Fato Viagem Extendida</name>
+      <name>FATO_POSTOS_TRABALHO</name>
       <description/>
-      <type>TRANS</type>
+      <type>JOB</type>
       <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;fato_viagem_extendida.ktr</filename>
-      <transname/>
+      <job_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;fato_postos_trabalho.kjb</filename>
+      <jobname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
       <set_logfile>N</set_logfile>
       <logfile/>
       <logext/>
       <add_date>N</add_date>
       <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
+      <loglevel>Nothing</loglevel>
       <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
       <wait_until_finished>Y</wait_until_finished>
       <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
       <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
+      <pass_export>N</pass_export>
       <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
+      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>960</xloc>
-      <yloc>90</yloc>
+      <xloc>730</xloc>
+      <yloc>140</yloc>
+      </entry>
+    <entry>
+      <name>FATO_RENDA</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;fato_renda.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>850</xloc>
+      <yloc>140</yloc>
+      </entry>
+    <entry>
+      <name>FATO_TRABALHO_DESLOCAMENTO</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;fato_trabalho_deslocamento.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>850</xloc>
+      <yloc>210</yloc>
       </entry>
   </entries>
   <hops>
     <hop>
       <from>START</from>
-      <to>Criando Dimens&#xe3;o Carro</to>
+      <to>DM_Atividade_MTE</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -289,8 +357,8 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>Criando Dimens&#xe3;o Carro</from>
-      <to>Criando Dimens&#xe3;o Data</to>
+      <from>DM_Atividade_MTE</from>
+      <to>DM_ATIVIDADE_PRINCIPAL</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -298,8 +366,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Criando Dimens&#xe3;o Data</from>
-      <to>Criando Dimens&#xe3;o Linhas</to>
+      <from>DM_ATIVIDADE_PRINCIPAL</from>
+      <to>DM_FAIXA_SALARIAL</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -307,8 +375,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Criando Dimens&#xe3;o Linhas</from>
-      <to>Criando Fato Viagem</to>
+      <from>DM_FAIXA_SALARIAL</from>
+      <to>DM_LOCAL</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -316,8 +384,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Criando Fato Viagem</from>
-      <to>Criando Rota</to>
+      <from>DM_LOCAL</from>
+      <to>FATO_OCUPACAO</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -325,8 +393,35 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Criando Rota</from>
-      <to>Criando Fato Viagem Extendida</to>
+      <from>FATO_OCUPACAO</from>
+      <to>FATO_POSTOS_TRABALHO</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>FATO_POSTOS_TRABALHO</from>
+      <to>FATO_RENDA</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>FATO_RENDA</from>
+      <to>FATO_TRABALHO_DESLOCAMENTO</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>FATO_TRABALHO_DESLOCAMENTO</from>
+      <to>Sucesso</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

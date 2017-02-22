@@ -100,13 +100,13 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Pegar nome da tabela temp</from><to>Salvar tabela temp</to><enabled>Y</enabled> </hop>
-  <hop> <from>Remove inst&#xe2;ncias com campos nulos</from><to>Pegar nome da tabela temp</to><enabled>Y</enabled> </hop>
-  <hop> <from>Conteudo do Arquivo</from><to>Filtrar Conteudo Nulo</to><enabled>Y</enabled> </hop>
-  <hop> <from>Converter JSON para Campos</from><to>Select values</to><enabled>Y</enabled> </hop>
-  <hop> <from>Select values</from><to>Remove inst&#xe2;ncias com campos nulos</to><enabled>Y</enabled> </hop>
-  <hop> <from>Filtrar Conteudo Nulo</from><to>Escrever no Log</to><enabled>Y</enabled> </hop>
+  <hop> <from>Resgata Nome Tabela Temp</from><to>Salvar tabela temp</to><enabled>Y</enabled> </hop>
+  <hop> <from>Remove Campos Nulos</from><to>Resgata Nome Tabela Temp</to><enabled>Y</enabled> </hop>
+  <hop> <from>Conteudo do Arquivo</from><to>Remove Conteudo Nulo</to><enabled>Y</enabled> </hop>
+  <hop> <from>Remove Conteudo Nulo</from><to>Escrever no Log</to><enabled>Y</enabled> </hop>
   <hop> <from>Escrever no Log</from><to>Converter JSON para Campos</to><enabled>Y</enabled> </hop>
+  <hop> <from>Converter JSON para Campos</from><to>Remove N&#xe3;o Usados</to><enabled>Y</enabled> </hop>
+  <hop> <from>Remove N&#xe3;o Usados</from><to>Remove Campos Nulos</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Conteudo do Arquivo</name>
@@ -160,8 +160,8 @@
     <extensionFieldName/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>160</xloc>
-      <yloc>40</yloc>
+      <xloc>50</xloc>
+      <yloc>110</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -287,8 +287,8 @@
     <sizeFieldName/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>160</xloc>
-      <yloc>229</yloc>
+      <xloc>410</xloc>
+      <yloc>110</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -351,14 +351,14 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>160</xloc>
-      <yloc>166</yloc>
+      <xloc>290</xloc>
+      <yloc>110</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Filtrar Conteudo Nulo</name>
+    <name>Remove Conteudo Nulo</name>
     <type>FilterRows</type>
     <description/>
     <distribute>Y</distribute>
@@ -380,8 +380,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>160</xloc>
-      <yloc>103</yloc>
+      <xloc>180</xloc>
+      <yloc>110</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -417,7 +417,7 @@
     </step>
 
   <step>
-    <name>Pegar nome da tabela temp</name>
+    <name>Resgata Nome Tabela Temp</name>
     <type>GetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -443,8 +443,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>160</xloc>
-      <yloc>470</yloc>
+      <xloc>810</xloc>
+      <yloc>110</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -483,7 +483,7 @@
     </step>
 
   <step>
-    <name>Remove inst&#xe2;ncias com campos nulos</name>
+    <name>Remove Campos Nulos</name>
     <type>FilterRows</type>
     <description/>
     <distribute>Y</distribute>
@@ -539,8 +539,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>160</xloc>
-      <yloc>390</yloc>
+      <xloc>670</xloc>
+      <yloc>110</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -601,14 +601,14 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>160</xloc>
-      <yloc>550</yloc>
+      <xloc>810</xloc>
+      <yloc>180</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Select values</name>
+    <name>Remove N&#xe3;o Usados</name>
     <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
@@ -645,8 +645,8 @@
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>160</xloc>
-      <yloc>310</yloc>
+      <xloc>550</xloc>
+      <yloc>110</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

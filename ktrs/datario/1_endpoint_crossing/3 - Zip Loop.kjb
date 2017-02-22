@@ -75,8 +75,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>160</xloc>
-      <yloc>30</yloc>
+      <xloc>60</xloc>
+      <yloc>100</yloc>
       </entry>
     <entry>
       <name>Define Variaveis de Arquivos</name>
@@ -109,7 +109,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>160</xloc>
-      <yloc>120</yloc>
+      <yloc>100</yloc>
       </entry>
     <entry>
       <name>Itera Arquivos Descompactados</name>
@@ -139,8 +139,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>160</xloc>
-      <yloc>560</yloc>
+      <xloc>760</xloc>
+      <yloc>100</yloc>
       </entry>
     <entry>
       <name>Falha Definir Variaveis Arquivos</name>
@@ -150,8 +150,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>330</xloc>
-      <yloc>120</yloc>
+      <xloc>160</xloc>
+      <yloc>200</yloc>
       </entry>
     <entry>
       <name>Sucesso Iteracao</name>
@@ -160,8 +160,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>160</xloc>
-      <yloc>840</yloc>
+      <xloc>520</xloc>
+      <yloc>200</yloc>
       </entry>
     <entry>
       <name>Falha Iteracao</name>
@@ -171,8 +171,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>320</xloc>
-      <yloc>560</yloc>
+      <xloc>890</xloc>
+      <yloc>100</yloc>
       </entry>
     <entry>
       <name>SQL - Criar tabela tempor&#xe1;ria</name>
@@ -187,8 +187,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>160</xloc>
-      <yloc>300</yloc>
+      <xloc>460</xloc>
+      <yloc>100</yloc>
       </entry>
     <entry>
       <name>Aguarde</name>
@@ -199,8 +199,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>160</xloc>
-      <yloc>480</yloc>
+      <xloc>640</xloc>
+      <yloc>100</yloc>
       </entry>
     <entry>
       <name>Descompactar Arquivos</name>
@@ -230,8 +230,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>160</xloc>
-      <yloc>210</yloc>
+      <xloc>310</xloc>
+      <yloc>100</yloc>
       </entry>
     <entry>
       <name>Remover Arquivos</name>
@@ -252,8 +252,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>160</xloc>
-      <yloc>750</yloc>
+      <xloc>630</xloc>
+      <yloc>200</yloc>
       </entry>
     <entry>
       <name>Mover Arquivos</name>
@@ -293,8 +293,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>160</xloc>
-      <yloc>660</yloc>
+      <xloc>760</xloc>
+      <yloc>200</yloc>
       </entry>
     <entry>
       <name>Valida JSON</name>
@@ -304,8 +304,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>160</xloc>
-      <yloc>390</yloc>
+      <xloc>570</xloc>
+      <yloc>100</yloc>
       </entry>
   </entries>
   <hops>

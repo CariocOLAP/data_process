@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>dm_linhas</name>
+    <name>3_load_nominatim</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -9,31 +9,6 @@
     <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
-        <parameter>
-            <name>DATABASE_NAME</name>
-            <default_value/>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>HOSTNAME</name>
-            <default_value/>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>PASSWORD</name>
-            <default_value/>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>PORT_NUMBER</name>
-            <default_value/>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>USERNAME</name>
-            <default_value/>
-            <description/>
-        </parameter>
     </parameters>
     <log>
 <trans-log-table><connection/>
@@ -88,13 +63,14 @@
     <partitionschemas>
     </partitionschemas>
     <slaveservers>
+         <slaveserver><name>Google Cloud</name><hostname>localhost</hostname><port>4998</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
     </slaveservers>
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2016&#x2f;05&#x2f;26 17&#x3a;34&#x3a;55.532</created_date>
+  <created_date>2016&#x2f;04&#x2f;18 21&#x3a;23&#x3a;10.653</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;05&#x2f;26 17&#x3a;34&#x3a;55.532</modified_date>
+  <modified_date>2016&#x2f;04&#x2f;18 21&#x3a;23&#x3a;10.653</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -125,17 +101,16 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Obtendo linhas a partir de viagens</from><to>Ordenando resultados</to><enabled>Y</enabled> </hop>
-  <hop> <from>Obtendo empresas</from><to>Ordenando resultados 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Ordenando resultados</from><to>Realizando jun&#xe7;&#xe3;o dos dados</to><enabled>Y</enabled> </hop>
-  <hop> <from>Ordenando resultados 2</from><to>Realizando jun&#xe7;&#xe3;o dos dados</to><enabled>Y</enabled> </hop>
-  <hop> <from>Realizando jun&#xe7;&#xe3;o dos dados</from><to>Adicionando sequ&#xea;ncia</to><enabled>Y</enabled> </hop>
-  <hop> <from>Adicionando sequ&#xea;ncia</from><to>Armanzenando resultados em DM_Linhas</to><enabled>Y</enabled> </hop>
-  <hop> <from>Criando tabela DM_Linhas</from><to>Obtendo linhas a partir de viagens</to><enabled>Y</enabled> </hop>
+  <hop> <from>Aguarda Criar Tabela</from><to>Salvar Tabela</to><enabled>Y</enabled> </hop>
+  <hop> <from>Calculator - Set URL</from><to>Get data from XML</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get data from XML</from><to>Tratando Campo CPF</to><enabled>Y</enabled> </hop>
+  <hop> <from>Renomear Valores</from><to>Aguarda Criar Tabela</to><enabled>Y</enabled> </hop>
+  <hop> <from>Tratando Campo CPF</from><to>Renomear Valores</to><enabled>Y</enabled> </hop>
+  <hop> <from>Table input</from><to>Calculator - Set URL</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Adicionando sequ&#xea;ncia</name>
-    <type>Sequence</type>
+    <name>Aguarda Criar Tabela</name>
+    <type>BlockUntilStepsFinish</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -144,26 +119,316 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-      <valuename>id_linha</valuename>
-      <use_database>N</use_database>
-      <connection>PF - localhost</connection>
-      <schema/>
-      <seqname>SEQ_</seqname>
-      <use_counter>Y</use_counter>
-      <counter_name/>
-      <start_at>1</start_at>
-      <increment_by>1</increment_by>
-      <max_value>999999999</max_value>
+    <steps>
+      <step>
+        <name>Criar Tabela</name>
+        <CopyNr>0</CopyNr>
+        </step>
+      </steps>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>848</xloc>
-      <yloc>64</yloc>
+      <xloc>710</xloc>
+      <yloc>130</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Armanzenando resultados em DM_Linhas</name>
+    <name>Calculator - Set URL</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <calculation><field_name>url1</field_name>
+<calc_type>CONSTANT</calc_type>
+<field_a>http&#x3a;&#x2f;&#x2f;localhost&#x3a;4999&#x2f;reverse.php&#x3f;format&#x3d;xml&#x26;lat&#x3d;</field_a>
+<field_b/>
+<field_c/>
+<value_type>String</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>Y</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>url2</field_name>
+<calc_type>ADD</calc_type>
+<field_a>url1</field_a>
+<field_b>latitude</field_b>
+<field_c/>
+<value_type>String</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>Y</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>url3</field_name>
+<calc_type>CONSTANT</calc_type>
+<field_a>&#x26;lon&#x3d;</field_a>
+<field_b/>
+<field_c/>
+<value_type>String</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>Y</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>url</field_name>
+<calc_type>ADD3</calc_type>
+<field_a>url2</field_a>
+<field_b>url3</field_b>
+<field_c>longitude</field_c>
+<value_type>String</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>230</xloc>
+      <yloc>130</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Criar Tabela</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>PF - localhost</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>DROP TABLE IF EXISTS stage.trajetoswithgeoinfo&#x3b;&#xa;&#xa;CREATE TABLE stage.trajetoswithgeoinfo&#xa;&#x28;&#xa;  numero TEXT&#xa;, itinerario TEXT&#xa;, sentido TEXT&#xa;, direcao BIGINT&#xa;, sequencia BIGINT&#xa;, latitude NUMERIC&#x28;49, 15&#x29;&#xa;, longitude NUMERIC&#x28;49, 15&#x29;&#xa;, id DOUBLE PRECISION&#xa;, cidade TEXT&#xa;, bairro TEXT&#xa;, rua TEXT&#xa;, cep TEXT&#xa;, ponto_final BOOLEAN&#xa;&#x29;&#xa;&#x3b;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>120</xloc>
+      <yloc>20</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get data from XML</name>
+    <type>getXMLData</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <include>N</include>
+    <include_field/>
+    <rownum>N</rownum>
+    <addresultfile>N</addresultfile>
+    <namespaceaware>N</namespaceaware>
+    <ignorecomments>N</ignorecomments>
+    <readurl>Y</readurl>
+    <validating>N</validating>
+    <usetoken>N</usetoken>
+    <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <rownum_field/>
+    <encoding>UTF-8</encoding>
+    <file>
+      <name/>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <fields>
+      <field>
+        <name>city</name>
+        <xpath>&#x2f;reversegeocode&#x2f;addressparts&#x2f;city</xpath>
+        <element_type>node</element_type>
+        <result_type>valueof</result_type>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>suburb</name>
+        <xpath>&#x2f;reversegeocode&#x2f;addressparts&#x2f;suburb</xpath>
+        <element_type>node</element_type>
+        <result_type>valueof</result_type>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>road</name>
+        <xpath>&#x2f;reversegeocode&#x2f;addressparts&#x2f;road</xpath>
+        <element_type>node</element_type>
+        <result_type>valueof</result_type>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>postcode</name>
+        <xpath>&#x2f;reversegeocode&#x2f;addressparts&#x2f;postcode</xpath>
+        <element_type>node</element_type>
+        <result_type>valueof</result_type>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+    </fields>
+    <limit>0</limit>
+    <loopxpath>&#x2f;reversegeocode</loopxpath>
+    <IsInFields>Y</IsInFields>
+    <IsAFile>N</IsAFile>
+    <XmlField>url</XmlField>
+    <prunePath/>
+    <shortFileFieldName/>
+    <pathFieldName/>
+    <hiddenFieldName/>
+    <lastModificationTimeFieldName/>
+    <uriNameFieldName/>
+    <rootUriNameFieldName/>
+    <extensionFieldName/>
+    <sizeFieldName/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>350</xloc>
+      <yloc>130</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Renomear Valores</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>numero</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>itinerario</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>sentido</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>direcao</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>sequencia</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>latitude</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>longitude</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>city</name>
+        <rename>cidade</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>suburb</name>
+        <rename>bairro</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>road</name>
+        <rename>rua</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>postcode2</name>
+        <rename>cep</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>ponto_final</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>590</xloc>
+      <yloc>130</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Salvar Tabela</name>
     <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -174,8 +439,8 @@
            <schema_name/>
            </partitioning>
     <connection>PF - localhost</connection>
-    <schema>dw</schema>
-    <table>dm_linha</table>
+    <schema>stage</schema>
+    <table>trajetoswithgeoinfo</table>
     <commit>1000</commit>
     <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
@@ -192,222 +457,68 @@
     <return_field/>
     <fields>
         <field>
-          <column_name>id_linha</column_name>
-          <stream_name>id_linha</stream_name>
+          <column_name>numero</column_name>
+          <stream_name>numero</stream_name>
         </field>
         <field>
-          <column_name>linha</column_name>
-          <stream_name>linha</stream_name>
+          <column_name>itinerario</column_name>
+          <stream_name>itinerario</stream_name>
         </field>
         <field>
-          <column_name>nome_linha</column_name>
-          <stream_name>nome_linha</stream_name>
+          <column_name>sentido</column_name>
+          <stream_name>sentido</stream_name>
         </field>
         <field>
-          <column_name>empresa</column_name>
-          <stream_name>empresa</stream_name>
+          <column_name>direcao</column_name>
+          <stream_name>direcao</stream_name>
+        </field>
+        <field>
+          <column_name>sequencia</column_name>
+          <stream_name>sequencia</stream_name>
+        </field>
+        <field>
+          <column_name>latitude</column_name>
+          <stream_name>latitude</stream_name>
+        </field>
+        <field>
+          <column_name>longitude</column_name>
+          <stream_name>longitude</stream_name>
+        </field>
+        <field>
+          <column_name>id</column_name>
+          <stream_name>id</stream_name>
+        </field>
+        <field>
+          <column_name>cidade</column_name>
+          <stream_name>cidade</stream_name>
+        </field>
+        <field>
+          <column_name>bairro</column_name>
+          <stream_name>bairro</stream_name>
+        </field>
+        <field>
+          <column_name>rua</column_name>
+          <stream_name>rua</stream_name>
+        </field>
+        <field>
+          <column_name>cep</column_name>
+          <stream_name>cep</stream_name>
+        </field>
+        <field>
+          <column_name>ponto_final</column_name>
+          <stream_name>ponto_final</stream_name>
         </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1040</xloc>
-      <yloc>64</yloc>
+      <xloc>820</xloc>
+      <yloc>130</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Criando tabela DM_Linhas</name>
-    <type>ExecSQL</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>PF - localhost</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>DROP TABLE IF EXISTS dw.dm_linha&#x3b;&#xa;&#xa;CREATE TABLE dw.dm_linha &#x28;&#xa;id_linha	BIGINT,&#xa;linha	VARCHAR&#x28;10&#x29;,&#xa;nome_linha	VARCHAR&#x28;512&#x29;,&#xa;empresa VARCHAR&#x28;128&#x29;&#xa;&#x29;&#x3b;&#xa;</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>144</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>MISSING ORIGINAL DATA - PICKING FROM DUMP</name>
-    <type>TextFileInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <accept_filenames>N</accept_filenames>
-    <passing_through_fields>N</passing_through_fields>
-    <accept_field/>
-    <accept_stepname/>
-    <separator>&#x3b;</separator>
-    <enclosure>&#x22;</enclosure>
-    <enclosure_breaks>N</enclosure_breaks>
-    <escapechar/>
-    <header>Y</header>
-    <nr_headerlines>1</nr_headerlines>
-    <footer>N</footer>
-    <nr_footerlines>1</nr_footerlines>
-    <line_wrapped>N</line_wrapped>
-    <nr_wraps>1</nr_wraps>
-    <layout_paged>N</layout_paged>
-    <nr_lines_per_page>80</nr_lines_per_page>
-    <nr_lines_doc_header>0</nr_lines_doc_header>
-    <noempty>Y</noempty>
-    <include>N</include>
-    <include_field/>
-    <rownum>N</rownum>
-    <rownumByFile>N</rownumByFile>
-    <rownum_field/>
-    <format>mixed</format>
-    <encoding/>
-    <add_to_result_filenames>Y</add_to_result_filenames>
-    <file>
-      <name>&#x24;&#x7b;Internal.Transformation.Filename.Directory&#x7d;&#x2f;..&#x2f;..&#x2f;missing_original_data&#x2f;</name>
-      <filemask>dm_linha.csv</filemask>
-      <exclude_filemask/>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-      <type>CSV</type>
-      <compression>None</compression>
-    </file>
-    <filters>
-    </filters>
-    <fields>
-      <field>
-        <name>id_linha</name>
-        <type>Integer</type>
-        <format>&#x23;</format>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>-1</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>linha</name>
-        <type>Integer</type>
-        <format>&#x23;</format>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>-1</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>nome_linha</name>
-        <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>empresa</name>
-        <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>nome_fantasia_empresa</name>
-        <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-    </fields>
-    <limit>0</limit>
-    <error_ignored>N</error_ignored>
-    <skip_bad_files>N</skip_bad_files>
-    <file_error_field/>
-    <file_error_message_field/>
-    <error_line_skipped>N</error_line_skipped>
-    <error_count_field/>
-    <error_fields_field/>
-    <error_text_field/>
-    <bad_line_files_destination_directory/>
-    <bad_line_files_extension>warning</bad_line_files_extension>
-    <error_line_files_destination_directory/>
-    <error_line_files_extension>error</error_line_files_extension>
-    <line_number_files_destination_directory/>
-    <line_number_files_extension>line</line_number_files_extension>
-    <date_format_lenient>Y</date_format_lenient>
-    <date_format_locale>en_US</date_format_locale>
-    <shortFileFieldName/>
-    <pathFieldName/>
-    <hiddenFieldName/>
-    <lastModificationTimeFieldName/>
-    <uriNameFieldName/>
-    <rootUriNameFieldName/>
-    <extensionFieldName/>
-    <sizeFieldName/>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>496</xloc>
-      <yloc>64</yloc>
-      <draw>N</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Obtendo empresas</name>
+    <name>Table input</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -418,23 +529,23 @@
            <schema_name/>
            </partitioning>
     <connection>PF - localhost</connection>
-    <sql>SELECT l.linha, l.empresa&#xa;FROM stage.empresa_linha l</sql>
-    <limit>0</limit>
+    <sql>SELECT &#x2a;&#xa;FROM stage.prepare_routes</sql>
+    <limit/>
     <lookup/>
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>336</xloc>
-      <yloc>208</yloc>
+      <xloc>130</xloc>
+      <yloc>130</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Obtendo linhas a partir de viagens</name>
-    <type>TableInput</type>
+    <name>Tratando Campo CPF</name>
+    <type>ReplaceString</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -443,113 +554,23 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>PF - localhost</connection>
-    <sql>SELECT DISTINCT linha, nome_linha &#xa;FROM stage.viagens &#xa;ORDER BY linha ASC</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>336</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Ordenando resultados</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
-      <prefix>out</prefix>
-      <sort_size>1000000</sort_size>
-      <free_memory/>
-      <compress>N</compress>
-      <compress_variable/>
-      <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>linha</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <presorted>N</presorted>
+        <in_stream_name>postcode</in_stream_name>
+        <out_stream_name>postcode2</out_stream_name>
+        <use_regex>no</use_regex>
+        <replace_string>-</replace_string>
+        <replace_by_string/>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
       </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>512</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Ordenando resultados 2</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
-      <prefix>out</prefix>
-      <sort_size>1000000</sort_size>
-      <free_memory/>
-      <compress>N</compress>
-      <compress_variable/>
-      <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>linha</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>688</xloc>
-      <yloc>208</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Realizando jun&#xe7;&#xe3;o dos dados</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<join_type>LEFT OUTER</join_type>
-<step1>Ordenando resultados</step1>
-<step2>Ordenando resultados 2</step2>
-    <keys_1>
-      <key>linha</key>
-    </keys_1>
-    <keys_2>
-      <key>linha</key>
-    </keys_2>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>688</xloc>
-      <yloc>64</yloc>
+      <xloc>470</xloc>
+      <yloc>130</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
